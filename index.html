@@ -1,0 +1,19 @@
+<!doctype html><html lang="id"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ayo Memahami!</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f8f3e8;color:#243c33;font:18px/1.65 system-ui,sans-serif}main{max-width:700px;margin:auto;padding:24px 18px 48px}header{border-bottom:1px solid #ded8c9;padding-bottom:12px;font-weight:750}h1,h2{font-family:Georgia,serif;line-height:1.15}h1{font-size:clamp(2.4rem,8vw,4rem);margin:.3em 0}article{background:#fffdf7;border:1px solid #ded8c9;border-radius:20px;padding:clamp(20px,5vw,40px);margin-top:24px}small{color:#506559}button{font:inherit;font-weight:650;padding:10px 17px;border-radius:12px;border:1px solid #285746;background:#285746;color:white;cursor:pointer}button.secondary{background:transparent;color:#285746}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}details{margin-top:12px}summary{cursor:pointer}button:focus-visible,summary:focus-visible{outline:3px solid #bd701d;outline-offset:3px}</style>
+<main><header>Ayo Memahami!</header><article id="card"></article><p id="status" role="status"></p></main><script>
+const steps=[
+ {label:"Bacakan",title:"Memberi minum anjing",body:"Seorang laki-laki sedang berjalan dan merasa sangat haus. Ia menemukan sumur, turun, lalu minum. Saat keluar, ia melihat seekor anjing yang kehausan. Ia teringat bagaimana rasanya haus tadi. Ia pun turun lagi, mengisi sepatunya dengan air, lalu memberi anjing itu minum. Allah menghargai kebaikannya dan mengampuninya.",source:"Ringkasan kisah dari hadis riwayat Bukhari dan Muslim."},
+ {label:"Ajak ngobrol",title:"Apa yang ia lihat?",body:"Hewan apa yang dilihat laki-laki itu setelah keluar dari sumur?",hint:"Seekor anjing yang sedang kehausan."},
+ {label:"Ajak ngobrol",title:"Mengapa ia membantu?",body:"Mengapa laki-laki itu mau turun lagi ke sumur? Coba ceritakan dengan kata-katamu sendiri.",hint:"Ia ingat bagaimana rasanya sangat haus dan melihat anjing itu juga membutuhkan air."},
+ {label:"Refleksi dan aksi",title:"Satu kebaikan hari ini",body:"Kapan kamu pernah membutuhkan bantuan? Saat makan bersama hari ini, coba tawarkan segelas air kepada satu anggota keluarga."}
+];
+let current=0;const card=document.querySelector("#card"),status=document.querySelector("#status");
+function draw(focus=false){
+ const step=steps[current];
+ card.innerHTML='<small>'+step.label+(step.hint?' · '+current+' dari 2':'')+'</small><h1 tabindex="-1">'+step.title+'</h1><p>'+step.body+'</p>'+(step.source?'<small>'+step.source+'</small>':'')+(step.hint?'<details><summary>Panduan untuk orang tua</summary><p>'+step.hint+'</p></details>':'')+'<div class="actions">'+(current?'<button class="secondary" id="back">Kembali</button>':'')+'<button id="next">'+['Mulai ngobrol','Pertanyaan berikutnya','Lanjut ke refleksi','Tandai selesai'][current]+'</button></div>';
+ card.querySelector("#back")?.addEventListener("click",()=>{current--;status.textContent="";draw(true)});
+ card.querySelector("#next").addEventListener("click",()=>{if(current<steps.length-1){current++;draw(true);return}try{localStorage.setItem("ayo-memahami-kisah-1","selesai");status.textContent="Kisah selesai. Progres tersimpan di perangkat ini."}catch{status.textContent="Kisah selesai."}});
+ if(focus)card.querySelector("h1").focus();
+}
+draw();try{if(localStorage.getItem("ayo-memahami-kisah-1")==="selesai")status.textContent="Kisah ini sudah pernah diselesaikan."}catch{}
+</script></html>
