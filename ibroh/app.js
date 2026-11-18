@@ -5,7 +5,8 @@ const levels = ['Semua kisah', 'Menemukan fakta', 'Menyusun urutan', 'Sebab & ak
 const tones = ['#e5eadc', '#f1e8d9', '#e4e9e6', '#e9e5d9', '#e5e8d8'];
 const glyphs = ['⌁', '❧', '✦', '◡', '❀', '♧', '◡', '◈', '⌁', '❦', '⌁', '❧', '♧', '◈', '✧', '◒', '❧', '◡', '◒', '♧', '❦', '◈', '♧', '✦', '❀'];
 let stories = [];
-let state = { stories: {}, last: null };
+let state = { stories: {}, last: null, sessions: [] };
+const sessionFields = ['date', 'story', 'understanding', 'notes', 'practice'];
 let saveAvailable = true;
 let filter = 0;
 let query = '';
@@ -25,6 +26,7 @@ function loadState() {
         }
       }
       if (stories.some(story => story.id === saved.last)) state.last = saved.last;
+      if (Array.isArray(saved.sessions)) state.sessions = saved.sessions.slice(0, 5).map(session => Object.fromEntries(sessionFields.map(field => [field, typeof session?.[field] === 'string' ? session[field].slice(0, 3000) : ''])));
     }
   } catch { saveAvailable = false; }
 }
@@ -75,17 +77,42 @@ function renderHome(catalog = false) {
   const next = last && !state.stories[last.id]?.completed ? last : stories.find(story => !state.stories[story.id]?.completed) || stories[0];
   document.title = `${catalog ? 'Jelajahi kisah' : 'IBROH'} — Memahami kisah, menumbuhkan kebaikan`;
   main.innerHTML = `${catalog ? `<div class="intro"><div><p class="eyebrow">Koleksi kisah</p><h1>Temukan kisah untuk hari ini.</h1><p>Pilih sesuai rasa ingin tahu dan kesiapan anak.</p></div></div>` : `<div class="intro"><div><h1 class="welcome-heading">Assalamu’alaikum, Abba & Umma.</h1><p>Yuk Mulai waktu berkualitas bersama anak, melalui cerita Islami, percakapan hangat, dan aksi kebaikan yang sederhana.</p></div><span class="date-note">Mulai dari satu kisah kecil.</span></div><section class="hero" aria-label="Mulai membaca bersama"><div class="hero-copy"><p class="eyebrow">25 kisah Al-Qur’an & hadis</p><h2>Memahami kisah.<br><em>Menumbuhkan</em><br>kebaikan.</h2><p>Temani anak menemukan hikmah, lalu bawa satu kebaikan ke keseharian keluarga.</p><a class="primary" href="#kisah/${next.id}">${last && !state.stories[last.id]?.completed ? 'Lanjutkan kisah' : 'Mulai baca bersama'} <span aria-hidden="true">→</span></a></div></section>`}
-  <section aria-labelledby="collection-title"><div class="section-top"><div><h2 id="collection-title">${catalog ? 'Semua kisah' : 'Kisah untuk dibaca bersama'}</h2><p id="result-count" aria-live="polite"></p></div>${catalog ? '' : '<a class="link-button" href="#perjalanan">Perjalanan kita <span aria-hidden="true">↗</span></a>'}</div>${filtersMarkup()}<div class="cards" id="story-grid"></div></section><section class="bottom-callout"><span aria-hidden="true">❧</span><div><h3>Ayah & Bunda juga ikut belajar.</h3><p>Temani proses berpikirnya. Dengarkan dulu, lalu temukan hikmahnya bersama.</p></div><button class="secondary" data-guide>Baca panduan ↗</button></section>`;
+  <section aria-labelledby="collection-title"><div class="section-top"><div><h2 id="collection-title">${catalog ? 'Semua kisah' : 'Kisah untuk dibaca bersama'}</h2><p id="result-count" aria-live="polite"></p></div>${catalog ? '' : '<a class="link-button" href="#perjalanan">Lembar Pantau 5 Sesi <span aria-hidden="true">↗</span></a>'}</div>${filtersMarkup()}<div class="cards" id="story-grid"></div></section><section class="bottom-callout"><span aria-hidden="true">❧</span><div><h3>Ayah & Bunda juga ikut belajar.</h3><p>Temani proses berpikirnya. Dengarkan dulu, lalu temukan hikmahnya bersama.</p></div><button class="secondary" data-guide>Baca panduan ↗</button></section>`;
   refreshCards();
+}
+function sessionFor(index) {
+  if (!state.sessions[index]) state.sessions[index] = {};
+  return state.sessions[index];
+}
+function sessionCount() {
+  return state.sessions.filter(session => sessionFields.some(field => (session?.[field] || '').trim())).length;
+}
+function sessionTrackerMarkup() {
+  const options = ['', 'Masih perlu dibimbing', 'Mulai memahami dengan bantuan', 'Bisa menjelaskan dengan kata sendiri'];
+  return `<section class="session-tracker" aria-label="Catatan lima sesi"><p class="session-status" id="session-count">${sessionCount()} dari 5 sesi sudah dicatat</p><p class="tiny">Amati prosesnya dengan hangat. Anak boleh membutuhkan waktu yang berbeda pada setiap kisah.</p><div class="session-list">${Array.from({length:5}, (_,index) => {
+    const session = sessionFor(index);
+    const field = name => `data-session="${index}" data-session-field="${name}"`;
+    return `<details class="session-card" ${index === 0 ? 'open' : ''}><summary>Sesi ${index + 1}<span id="session-label-${index}">${escapeHtml(session.date || 'Belum ada tanggal')}</span></summary><div class="session-fields"><label>Tanggal membaca<input type="date" ${field('date')} value="${escapeHtml(session.date || '')}"></label><label>Kisah yang dibaca<select ${field('story')}><option value="">Pilih kisah</option>${stories.map(story => `<option value="${story.id}" ${session.story === story.id ? 'selected' : ''}>${escapeHtml(story.title)}</option>`).join('')}</select></label><label class="session-wide">Pemahaman anak<select ${field('understanding')}>${options.map(value => `<option value="${escapeHtml(value)}" ${session.understanding === value ? 'selected' : ''}>${value || 'Pilih hasil pengamatan'}</option>`).join('')}</select></label><label class="session-wide">Hal yang berkembang &amp; masih perlu didampingi<textarea ${field('notes')} maxlength="3000" placeholder="Apa yang anak ingat? Bagaimana ia menjelaskan pesan cerita? Catat contoh ucapannya…">${escapeHtml(session.notes || '')}</textarea></label><label class="session-wide">Kebaikan yang dicoba &amp; tindak lanjut<textarea ${field('practice')} maxlength="3000" placeholder="Kebaikan apa yang dicoba? Apa yang ingin kalian latih pada sesi berikutnya?">${escapeHtml(session.practice || '')}</textarea></label></div></details>`;
+  }).join('')}</div><p class="saved-note" id="session-save-note" role="status">${storageNote()} Catatan bisa berbeda di perangkat lain.</p></section>`;
+}
+function saveSessionInput(target) {
+  const index = Number(target.dataset.session);
+  const field = target.dataset.sessionField;
+  if (!Number.isInteger(index) || index < 0 || index > 4 || !sessionFields.includes(field)) return;
+  sessionFor(index)[field] = target.value.slice(0, 3000);
+  save();
+  document.querySelector('#session-count').textContent = `${sessionCount()} dari 5 sesi sudah dicatat`;
+  document.querySelector(`#session-label-${index}`).textContent = sessionFor(index).date || 'Belum ada tanggal';
+  document.querySelector('#session-save-note').textContent = storageNote() + ' Catatan bisa berbeda di perangkat lain.';
 }
 function renderJourney() {
   const complete = countComplete();
-  document.title = 'Perjalanan kita — IBROH';
+  document.title = 'Lembar Pantau 5 Sesi — IBROH';
   const selected = stories.filter(story => {
     const progress = state.stories[story.id] || {};
     return journeyFilter === 'bookmarked' ? progress.bookmarked : journeyFilter === 'completed' ? progress.completed : progress.started;
   });
-  main.innerHTML = `<div class="intro"><div><p class="eyebrow">Perjalanan keluarga</p><h1>Kebaikan tumbuh, sedikit demi sedikit.</h1><p>${storageNote()} Progres bisa berbeda di perangkat lain.</p></div></div><div class="journey-summary"><strong>${complete}<span style="font-size:20px;color:#8b997e"> / 25</span></strong><div><p>Kisah sudah dibaca dan dibahas bersama.</p><div class="progress-line" role="progressbar" aria-label="Kisah selesai" aria-valuenow="${complete}" aria-valuemin="0" aria-valuemax="25"><span style="width:${complete / 25 * 100}%"></span></div></div></div><div class="journey-tabs">${[['started','Pernah dibuka'],['bookmarked','Disimpan'],['completed','Sudah dibahas']].map(([key,label]) => `<button class="filter ${journeyFilter === key ? 'selected' : ''}" data-journey="${key}" aria-pressed="${journeyFilter === key}">${label}</button>`).join('')}</div><div class="cards">${selected.map(storyCard).join('') || `<div class="empty"><h3>${journeyFilter === 'bookmarked' ? 'Simpan kisah yang ingin dibaca lagi.' : journeyFilter === 'completed' ? 'Setiap perjalanan dimulai dari satu kisah.' : 'Kisah pertama menunggu kita.'}</h3><p>${journeyFilter === 'bookmarked' ? 'Tekan ikon hati pada kartu kisah untuk menyimpannya di sini.' : 'Buka satu kisah, baca bersama, dan bahas dengan santai.'}</p><a class="primary" href="#kisah">Jelajahi kisah →</a></div>`}</div>`;
+  main.innerHTML = `<div class="intro"><div><p class="eyebrow">Lembar Pantau 5 Sesi</p><h1>Catatan perkembangan dari waktu ke waktu.</h1><p>Catat cara anak memahami kisah dan kebaikan yang dicoba bersama. Isi satu sesi setiap kali selesai membaca.</p></div></div>${sessionTrackerMarkup()}<section class="story-history"><h2>Kisah yang sudah kita jelajahi</h2><div class="journey-summary"><strong>${complete}<span style="font-size:20px;color:#8b997e"> / 25</span></strong><div><p>Kisah sudah dibaca dan dibahas bersama.</p><div class="progress-line" role="progressbar" aria-label="Kisah selesai" aria-valuenow="${complete}" aria-valuemin="0" aria-valuemax="25"><span style="width:${complete / 25 * 100}%"></span></div></div></div><div class="journey-tabs">${[['started','Pernah dibuka'],['bookmarked','Disimpan'],['completed','Sudah dibahas']].map(([key,label]) => `<button class="filter ${journeyFilter === key ? 'selected' : ''}" data-journey="${key}" aria-pressed="${journeyFilter === key}">${label}</button>`).join('')}</div><div class="cards">${selected.map(storyCard).join('') || `<div class="empty"><h3>${journeyFilter === 'bookmarked' ? 'Simpan kisah yang ingin dibaca lagi.' : journeyFilter === 'completed' ? 'Setiap perjalanan dimulai dari satu kisah.' : 'Kisah pertama menunggu kita.'}</h3><p>${journeyFilter === 'bookmarked' ? 'Tekan ikon hati pada kartu kisah untuk menyimpannya di sini.' : 'Buka satu kisah, baca bersama, dan bahas dengan santai.'}</p><a class="primary" href="#kisah">Jelajahi kisah →</a></div>`}</div></section>`;
 }
 function questionMarkup(question, index, story) {
   const answer = progressFor(story.id).answers[index] || '';
@@ -106,7 +133,7 @@ function renderReader(story) {
     panel = `<section class="reading"><p class="eyebrow">Hikmah kisah</p><h2>${escapeHtml(story.value)}</h2><p>${escapeHtml(story.lesson)}</p><div class="lesson-box"><strong>Renungkan bersama</strong>${escapeHtml(story.reflection)}</div><label class="answer-label" for="reflection">Apa yang kita pelajari hari ini?</label><textarea id="reflection" class="answer" data-reflection maxlength="3000" placeholder="Catat pemikiran anak dan orang tua…">${escapeHtml(progress.reflection || '')}</textarea><div class="lesson-box"><strong>Satu kebaikan untuk dicoba</strong>${escapeHtml(story.practice)}<p class="tiny" style="margin:10px 0 0">Usulan kegiatan keluarga dari IBROH.</p></div><label class="practice-check"><input type="checkbox" data-practice ${progress.practiced ? 'checked' : ''}><span>Kami sudah mencoba kebaikan ini bersama.</span></label><p class="saved-note">${storageNote()}</p></section><div class="reader-actions"><button class="secondary" data-tab="1">← Kembali berdiskusi</button><button class="primary" data-complete>${progress.completed ? '✓ Kisah sudah dibahas' : 'Selesai membaca & berdiskusi'}</button></div>`;
   }
   const next = stories[stories.indexOf(story) + 1];
-  main.innerHTML = `<div class="reader-top"><a href="#kisah" class="back">← Kembali ke koleksi</a><div><button class="text-size" data-text-size aria-pressed="${largeText}" aria-label="${largeText ? 'Gunakan ukuran teks biasa' : 'Perbesar teks cerita'}">A<span style="font-size:18px">a</span></button> <button class="text-size" data-bookmark="${story.id}" aria-pressed="${Boolean(progress.bookmarked)}">${progress.bookmarked ? '♥ Disimpan' : '♡ Simpan'}</button></div></div><div class="reader-layout"><div class="reader-main"><header class="reader-heading" style="--tone:${tones[story.level-1]}"><p class="eyebrow">Tingkat ${story.level} · ${levels[story.level]}</p><h1>${escapeHtml(story.title)}</h1><p>${story.minutes} menit baca & bahas · ${escapeHtml(story.value)}</p></header><div class="read-tabs" role="tablist" aria-label="Langkah membaca">${['Baca kisah','Ayo memahami','Hikmah & praktik'].map((label,index) => `<button role="tab" id="tab-${index}" aria-controls="reader-panel" aria-selected="${currentTab === index}" class="${currentTab === index ? 'selected' : ''}" data-tab="${index}">${label}</button>`).join('')}</div><div id="reader-panel" role="tabpanel" aria-labelledby="tab-${currentTab}">${panel}</div></div><aside class="reader-side" aria-label="Pendamping membaca"><section><p class="eyebrow">Untuk Ayah & Bunda</p><h3>Hadir, lalu dengarkan.</h3><p>Beri anak waktu berpikir. Tanyakan, “Bagian mana yang membuatmu berpikir begitu?”</p><button class="link-button" data-guide>Buka panduan ↗</button></section><section><h3>Perjalanan kita</h3><p>${countComplete()} dari 25 kisah sudah dibahas.</p><div class="progress-line"><span style="width:${countComplete()/25*100}%"></span></div><p class="tiny">${storageNote()}</p>${progress.completed && next ? `<a class="primary" href="#kisah/${next.id}">Kisah berikutnya →</a>` : '<a class="link-button" href="#perjalanan">Lihat perjalanan ↗</a>'}</section></aside></div>`;
+  main.innerHTML = `<div class="reader-top"><a href="#kisah" class="back">← Kembali ke koleksi</a><div><button class="text-size" data-text-size aria-pressed="${largeText}" aria-label="${largeText ? 'Gunakan ukuran teks biasa' : 'Perbesar teks cerita'}">A<span style="font-size:18px">a</span></button> <button class="text-size" data-bookmark="${story.id}" aria-pressed="${Boolean(progress.bookmarked)}">${progress.bookmarked ? '♥ Disimpan' : '♡ Simpan'}</button></div></div><div class="reader-layout"><div class="reader-main"><header class="reader-heading" style="--tone:${tones[story.level-1]}"><p class="eyebrow">Tingkat ${story.level} · ${levels[story.level]}</p><h1>${escapeHtml(story.title)}</h1><p>${story.minutes} menit baca & bahas · ${escapeHtml(story.value)}</p></header><div class="read-tabs" role="tablist" aria-label="Langkah membaca">${['Baca kisah','Ayo memahami','Hikmah & praktik'].map((label,index) => `<button role="tab" id="tab-${index}" aria-controls="reader-panel" aria-selected="${currentTab === index}" class="${currentTab === index ? 'selected' : ''}" data-tab="${index}">${label}</button>`).join('')}</div><div id="reader-panel" role="tabpanel" aria-labelledby="tab-${currentTab}">${panel}</div></div><aside class="reader-side" aria-label="Pendamping membaca"><section><p class="eyebrow">Untuk Ayah & Bunda</p><h3>Hadir, lalu dengarkan.</h3><p>Beri anak waktu berpikir. Tanyakan, “Bagian mana yang membuatmu berpikir begitu?”</p><button class="link-button" data-guide>Buka panduan ↗</button></section><section><h3>Lembar Pantau 5 Sesi</h3><p>${countComplete()} dari 25 kisah sudah dibahas.</p><div class="progress-line"><span style="width:${countComplete()/25*100}%"></span></div><p class="tiny">${storageNote()}</p>${progress.completed && next ? `<a class="primary" href="#kisah/${next.id}">Kisah berikutnya →</a>` : '<a class="link-button" href="#perjalanan">Lihat perjalanan ↗</a>'}</section></aside></div>`;
 }
 function activeStory() { return stories.find(story => `#kisah/${story.id}` === location.hash); }
 function route() {
@@ -192,6 +219,7 @@ main.addEventListener('click', event => {
   }
 });
 main.addEventListener('input', event => {
+  if (event.target.hasAttribute('data-session-field')) { saveSessionInput(event.target); return; }
   if (event.target.matches('.search')) { query = event.target.value; refreshCards(); return; }
   const story = activeStory();
   if (!story) return;
@@ -201,6 +229,7 @@ main.addEventListener('input', event => {
   save();
 });
 main.addEventListener('change', event => {
+  if (event.target.hasAttribute('data-session-field')) { saveSessionInput(event.target); return; }
   const story = activeStory();
   if (story && event.target.hasAttribute('data-practice')) { progressFor(story.id).practiced = event.target.checked; save(); }
 });
