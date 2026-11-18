@@ -25,3 +25,19 @@
   font-family: 'Happy School', Arial, sans-serif;
   font-weight: 400;
 }
+
+.hero {
+  grid-template-columns: 1fr;
+  min-height: 0;
+}
+.hero-copy {
+  padding: 36px;
+}
+.hero-copy > p {
+  max-width: 560px;
+}
+@media (max-width: 760px) {
+  .hero-copy {
+    padding: 28px 25px;
+  }
+}
