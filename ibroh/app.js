@@ -133,22 +133,15 @@ function openInfo(kind) {
   document.querySelector('#dialog-content').innerHTML = kind === 'guide' ? `<p class="eyebrow">Panduan orang tua</p><h2>Mulai dari hadir bersama.</h2><p>Sesuaikan ritme dengan anak. Satu kisah bisa dibaca dan dibahas dalam beberapa pertemuan.</p><div class="guide-step"><b>1</b><div><h3>Baca dan kenali</h3><p>Awali dengan bismillah. Baca bergantian atau bacakan untuk anak. Bahas kata yang belum dipahami.</p></div></div><div class="guide-step"><b>2</b><div><h3>Dengarkan pikirannya</h3><p>Tanyakan isi cerita dan beri waktu berpikir. Ajak anak mencari petunjuk di bacaan. Pertanyaan pendapat boleh punya jawaban berbeda dengan alasan yang masuk akal.</p></div></div><div class="guide-step"><b>3</b><div><h3>Coba satu kebaikan</h3><p>Pilih kegiatan kecil yang bisa dilakukan bersama. Orang tua ikut memberi contoh. Tanyakan lagi esok hari bagaimana pengalamannya.</p></div></div><p class="tiny">Lima tingkat membantu memilih tantangan pemahaman. Semua kisah dapat dibuka sesuai kesiapan anak. Catatan dan progres tersimpan pada browser yang digunakan.</p>` : `<p class="eyebrow">Tentang IBROH</p>
 <h2>Memahami kisah.<br>Meneladani bersama.</h2>
 <p>IBROH tumbuh dari keinginan seorang Aba untuk lebih hadir menanamkan nilai-nilai agama dalam keseharian keluarga.</p>
-<h3>Mengapa pemahaman begitu penting?</h3>
-<p>Hampir semua pelajaran bertumpu pada pemahaman bacaan: soal cerita matematika, penjelasan sains, hingga nasihat dan ilmu agama. Asesmen literasi seperti AKM dan PISA pun menilai kemampuan memahami, menafsirkan, dan merenungkan bacaan, bukan sekadar membaca.</p>
-<h3>Kabar baiknya: pemahaman bisa dilatih</h3>
-<p>Pemahaman tumbuh lewat latihan bertahap: menemukan fakta, menyusun urutan, memahami sebab-akibat, membaca yang tersirat, lalu menilai dan merenung. Modul ini menyusunnya dalam lima tingkat dan 25 kisah. Seluruh kisah bersumber dari Al-Qur'an dan hadis sahih: kisah para nabi, orang saleh, dan sahabat Rasulullah. Sumbernya tercantum di setiap kisah.</p>
-<p>Semoga setiap cerita menjadi pintu bagi anak untuk berpikir, merasakan, dan beramal saleh.</p>
-<h3>Doa sebelum belajar</h3>
-<p>Ajak anak berdoa sebelum mulai: "Rabbi zidni 'ilman warzuqni fahman."<br>Artinya: "Ya Tuhanku, tambahkanlah ilmuku dan anugerahkanlah aku pemahaman."</p>
-<p>Awali dengan bismillah dan akhiri dengan alhamdulillah. Kebiasaan kecil ini membuat belajar terasa bermakna.</p>
-<h3>Sumber kisah</h3>
+<p>Bacakan satu kisah, ajak anak membahas maknanya, lalu coba satu kebaikan bersama. Lewat 25 kisah dalam lima tingkat, anak berlatih memahami bacaan setahap demi setahap, dari menemukan fakta hingga merenungkan pesan cerita.</p>
+<h3>Materi bacaan</h3>
 <p>Seluruh 25 kisah bersumber dari Al-Qur'an atau hadis sahih riwayat Bukhari dan Muslim. Sumbernya tertulis di bawah setiap kisah.</p>
 <p>Kisah ditulis ulang dengan bahasa anak dan sebagian rincian diringkas. Ajaklah anak membaca terjemahan ayat atau hadis aslinya bersama guru atau ustaz.</p>
 <p>Untuk kisah para nabi, ucapkan "alaihissalam" dan untuk Rasulullah ucapkan shalawat. Untuk sahabat ucapkan "radhiyallahu anhu".</p>
-<h3>Menanamkan nilai lewat amal</h3>
-<p>Pilih satu nilai pekan ini (misalnya berbagi) dan amalkan bersama di rumah.</p>
-<p>Beri contoh, bukan hanya nasihat. Anak belajar paling kuat dari teladan.</p>
-<p>Tanyakan di akhir pekan: "Kebaikan apa yang sudah kamu lakukan?" lalu puji dan doakan.</p>`;
+<h3>Mengapa pemahaman begitu penting?</h3>
+<p>Hampir semua pelajaran bertumpu pada pemahaman bacaan: soal cerita matematika, penjelasan sains, hingga nasihat dan ilmu agama. Asesmen literasi seperti AKM dan PISA pun menilai kemampuan memahami, menafsirkan, dan merenungkan bacaan, bukan sekadar membaca.</p>
+<h3>Catatan keluarga</h3>
+<p>Luangkan waktu untuk satu kisah hari ini. Setelah membacakannya, coba tanya, “Bagian mana yang paling kamu ingat?” Beri anak waktu untuk menjawab dengan kata-katanya sendiri. Lalu pilih satu kebaikan dari kisah itu yang bisa kalian coba bersama hari ini.</p>`;
   document.querySelector('#info-dialog').showModal();
 }
 document.querySelector('#guide-button').addEventListener('click', () => openInfo('guide'));
