@@ -53,7 +53,7 @@ function storyCard(story) {
   return `<article class="story-card"><div class="card-art" style="--tone:${tones[story.level - 1]};--glyph:#6e8062"><span class="card-glyph" aria-hidden="true">${glyphs[index]}</span><button class="bookmark" data-bookmark="${story.id}" aria-label="${progress.bookmarked ? 'Hapus simpanan' : 'Simpan kisah'} ${escapeHtml(story.title)}" aria-pressed="${Boolean(progress.bookmarked)}">${progress.bookmarked ? '♥' : '♡'}</button></div><div class="card-body"><div class="card-meta"><span class="level-label">Tingkat ${story.level}</span><span>${story.minutes} menit baca & bahas</span></div><h3><a href="#kisah/${story.id}">${escapeHtml(story.title)}</a></h3><p>${escapeHtml(story.value)}</p><div class="card-bottom"><span class="${progress.completed ? 'complete-label' : ''}">${progress.completed ? '✓ Sudah dibahas' : progress.started ? 'Sedang dibaca' : 'Baca bersama'}</span><a href="#kisah/${story.id}">${progress.started ? 'Lanjutkan' : 'Buka kisah'} <span aria-hidden="true">↗</span></a></div></div></article>`;
 }
 function filtersMarkup() {
-  return `<div class="toolbar"><div class="filters" aria-label="Tingkat pemahaman"><button class="filter ${filter === 0 ? 'selected' : ''}" data-filter="0" aria-pressed="${filter === 0}">Semua kisah</button>${[1,2,3,4,5].map(level => `<button class="filter ${filter === level ? 'selected' : ''}" data-filter="${level}" aria-label="Tingkat ${level}, ${levels[level]}" aria-pressed="${filter === level}">Tingkat ${level}</button>`).join('')}</div><label class="search-wrap"><span aria-hidden="true">⌕</span><input class="search" type="search" maxlength="100" aria-label="Cari judul atau nilai kebaikan" placeholder="Cari kisah atau kebaikan…" value="${escapeHtml(query)}"></label></div>`;
+  return `<div class="toolbar"><div class="filters" aria-label="Tingkat pemahaman">${[1,2,3,4,5].map(level => `<button class="filter ${filter === level ? 'selected' : ''}" data-filter="${level}" aria-label="Tingkat ${level}, ${levels[level]}" aria-pressed="${filter === level}">Tingkat ${level}</button>`).join('')}</div><label class="search-wrap"><span aria-hidden="true">⌕</span><input class="search" type="search" maxlength="100" aria-label="Cari judul atau nilai kebaikan" placeholder="Cari kisah atau kebaikan…" value="${escapeHtml(query)}"></label></div>`;
 }
 function filteredStories() {
   const term = query.trim().toLocaleLowerCase('id');
@@ -144,7 +144,12 @@ main.addEventListener('click', event => {
   const button = event.target.closest('button');
   if (!button) return;
   if (button.hasAttribute('data-guide')) return openInfo('guide');
-  if (button.hasAttribute('data-filter')) { filter = Number(button.dataset.filter); refreshCards(); return; }
+  if (button.hasAttribute('data-filter')) {
+    const level = Number(button.dataset.filter);
+    filter = filter === level ? 0 : level;
+    refreshCards();
+    return;
+  }
   if (button.hasAttribute('data-reset-search')) { filter = 0; query = ''; main.querySelector('.search').value = ''; refreshCards(); return; }
   if (button.hasAttribute('data-journey')) { journeyFilter = button.dataset.journey; renderJourney(); return; }
   if (button.hasAttribute('data-bookmark')) {
