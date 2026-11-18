@@ -65,7 +65,8 @@ function emptySearch() { return '<div class="empty"><h3>Kisahnya belum ditemukan
 function refreshCards() {
   const results = filteredStories();
   document.querySelector('#story-grid').innerHTML = results.map(storyCard).join('') || emptySearch();
-  document.querySelector('#result-count').textContent = `${results.length} kisah${filter ? ` · ${levels[filter]}` : ' untuk dibaca bersama'}`;
+  const resultCount = document.querySelector('#result-count');
+  if (resultCount) resultCount.textContent = `${results.length} kisah${filter ? ` · ${levels[filter]}` : ' untuk dibaca bersama'}`;
   document.querySelectorAll('[data-filter]').forEach(button => {
     const selected = Number(button.dataset.filter) === filter;
     button.classList.toggle('selected', selected);
@@ -77,7 +78,7 @@ function renderHome(catalog = false) {
   const next = last && !state.stories[last.id]?.completed ? last : stories.find(story => !state.stories[story.id]?.completed) || stories[0];
   document.title = `${catalog ? 'Jelajahi kisah' : 'IBROH'} — Memahami kisah, menumbuhkan kebaikan`;
   main.innerHTML = `${catalog ? `<div class="intro"><div><p class="eyebrow">Koleksi kisah</p><h1>Temukan kisah untuk hari ini.</h1><p>Pilih sesuai rasa ingin tahu dan kesiapan anak.</p></div></div>` : `<div class="intro"><div><h1 class="welcome-heading">Assalamu’alaikum, Abba & Umma.</h1><p>Yuk Mulai waktu berkualitas bersama anak, melalui cerita Islami, percakapan hangat, dan aksi kebaikan yang sederhana.</p></div><span class="date-note">Mulai dari satu kisah kecil.</span></div><section class="hero" aria-label="Mulai membaca bersama"><div class="hero-copy"><p class="eyebrow">25 kisah Al-Qur’an & hadis</p><h2>Memahami kisah.<br><em>Menumbuhkan</em><br>kebaikan.</h2><p>Temani anak menemukan hikmah, lalu bawa satu kebaikan ke keseharian keluarga.</p><a class="primary" href="#kisah/${next.id}">${last && !state.stories[last.id]?.completed ? 'Lanjutkan kisah' : 'Mulai baca bersama'} <span aria-hidden="true">→</span></a></div></section>`}
-  <section aria-labelledby="collection-title"><div class="section-top"><div><h2 id="collection-title">${catalog ? 'Semua kisah' : 'Kisah untuk dibaca bersama'}</h2><p id="result-count" aria-live="polite"></p></div>${catalog ? '' : '<a class="link-button" href="#perjalanan">Lembar Pantau 5 Sesi <span aria-hidden="true">↗</span></a>'}</div>${filtersMarkup()}<div class="cards" id="story-grid"></div></section><section class="bottom-callout"><span aria-hidden="true">❧</span><div><h3>Ayah & Bunda juga ikut belajar.</h3><p>Temani proses berpikirnya. Dengarkan dulu, lalu temukan hikmahnya bersama.</p></div><button class="secondary" data-guide>Baca panduan ↗</button></section>`;
+  <section aria-label="Koleksi kisah">${catalog ? '' : '<div class="section-top"><div><h2 id="collection-title">Kisah untuk dibaca bersama</h2><p id="result-count" aria-live="polite"></p></div><a class="link-button" href="#perjalanan">Lembar Pantau 5 Sesi <span aria-hidden="true">↗</span></a></div>'}${filtersMarkup()}<div class="cards" id="story-grid"></div></section><section class="bottom-callout"><span aria-hidden="true">❧</span><div><h3>Ayah & Bunda juga ikut belajar.</h3><p>Temani proses berpikirnya. Dengarkan dulu, lalu temukan hikmahnya bersama.</p></div><button class="secondary" data-guide>Baca panduan ↗</button></section>`;
   refreshCards();
 }
 function sessionFor(index) {
