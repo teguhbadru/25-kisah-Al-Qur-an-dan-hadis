@@ -60,3 +60,8 @@
 
 /* Keep the header tagline on one line on every screen. */
 .brand-sub{max-width:none;white-space:nowrap}
+
+/* Compact brand lockup using the supplied emblem. */
+.brand{gap:3px;letter-spacing:1px}
+.brand-icon{display:block;width:32px;height:32px;object-fit:contain;flex:none}
+.brand-dot{margin-left:-3px}
