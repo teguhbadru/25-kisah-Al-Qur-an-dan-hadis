@@ -93,3 +93,13 @@
 .session-wide{grid-column:1/-1}
 .story-history>h2{font-size:24px;margin-bottom:20px}
 @media(max-width:600px){.session-fields{grid-template-columns:1fr;padding:4px 16px 18px}.session-card summary{padding:16px}.session-fields input,.session-fields select,.session-fields textarea{font-size:16px}}
+
+.start-duration{font-size:12px!important;margin:12px 0 0!important;max-width:none!important}
+.return-note{border-top:1px solid #cbd5bf;margin-top:24px;padding-top:20px;max-width:600px;font-size:13px}
+.return-note p{margin:8px 0;font-size:13px;line-height:1.8}
+.return-note>span{display:block;color:var(--muted);font-size:12px;line-height:1.7}
+.return-note button{display:block}
+.level-help{padding:14px 18px;border:1px solid var(--line);border-radius:8px;background:#edf1e8;font-size:13px;color:var(--green);margin:0 0 18px}
+.session-complete>.tiny{margin:14px 0 0}
+.session-complete .lesson-box{margin-bottom:22px}
+.hero-copy>.primary{max-width:100%;white-space:normal;text-align:left;line-height:1.5}
