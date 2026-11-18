@@ -65,3 +65,6 @@
 .brand{gap:3px;letter-spacing:1px}
 .brand-icon{display:block;width:32px;height:32px;object-fit:contain;flex:none}
 .brand-dot{margin-left:-3px}
+
+.brand-filters{position:absolute;overflow:hidden;pointer-events:none}
+.brand-icon{filter:url(#brand-green);mix-blend-mode:multiply}
