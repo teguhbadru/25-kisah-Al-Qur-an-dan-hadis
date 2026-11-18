@@ -10,3 +10,18 @@
 
 .book-stack:before{inset:9px -9px 6px auto;width:9px;border-bottom:0;z-index:0}.book-stack:after{content:"";position:absolute;bottom:-8px;left:5px;right:-5px;height:8px;background:repeating-linear-gradient(#e7e4d4 0 2px,#d5d3c4 2px 3px);border-bottom:3px solid #294e3b;border-radius:0 0 4px 2px;z-index:0}
 
+
+@font-face {
+  font-family: 'Happy School';
+  src: url('./fonts/happy-school.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.brand,
+.footer-brand,
+.book-stack strong {
+  font-family: 'Happy School', Arial, sans-serif;
+  font-weight: 400;
+}
