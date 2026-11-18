@@ -57,3 +57,6 @@
     padding: 28px 25px;
   }
 }
+
+/* Keep the header tagline on one line on every screen. */
+.brand-sub{max-width:none;white-space:nowrap}
