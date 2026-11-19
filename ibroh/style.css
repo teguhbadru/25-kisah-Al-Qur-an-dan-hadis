@@ -173,3 +173,13 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .schedule-box[open]>summary::after{content:"−"}
 .schedule-box>summary:focus-visible{outline-offset:-4px}
 @media(max-width:600px){.collection-guidance .schedule-box>summary{font-size:15px;padding:8px 16px}}
+
+/* Give every collection guide the same expandable heading. */
+.collection-guidance .prayer-box>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--white);font-family:var(--sans);font-size:16px;font-weight:700;line-height:1.5;padding:8px 20px}
+.collection-guidance .sessions-guide-box>summary{background:#6a8266}
+.collection-guidance .habits-guide-box>summary{background:#857449}
+.collection-guidance .prayer-box>summary::-webkit-details-marker{display:none}
+.collection-guidance .prayer-box>summary::after{content:"+";font-size:20px;font-weight:400;line-height:1}
+.collection-guidance .prayer-box[open]>summary::after{content:"−"}
+.collection-guidance .prayer-box>summary:focus-visible{outline-offset:-4px}
+@media(max-width:600px){.collection-guidance .prayer-box>summary{font-size:15px;padding:8px 16px}}
