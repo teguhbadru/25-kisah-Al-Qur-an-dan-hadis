@@ -142,3 +142,9 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .prayer-box li{font-size:15px;line-height:1.8;padding-left:3px;margin:0 0 3px}
 .prayer-box li::marker{color:#6a8266}
 @media(max-width:600px){.prayer-box{border-radius:16px}.prayer-box h2{font-size:16px;padding:8px 16px}.prayer-box ul{padding:12px 16px 14px 34px}.prayer-box li{font-size:13px}}
+
+/* Match the story panel to the opening prayer card. */
+.reading.story-reading{padding:0;border:1px solid #cbd3c7;border-radius:20px;overflow:hidden}
+.story-reading>h2{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.5;color:var(--white);background:var(--green);padding:8px 20px;margin:0}
+.story-reading-body{padding:24px 34px 30px}
+@media(max-width:600px){.reading.story-reading{border-radius:16px}.story-reading>h2{font-size:16px;padding:8px 16px}.story-reading-body{padding:20px 21px 25px}}
