@@ -105,7 +105,7 @@
 .hero-copy>.primary{max-width:100%;white-space:normal;text-align:left;line-height:1.5}
 
 /* Make About IBROH a clearly visible button. */
-.sidebar>.about-button{background:var(--green);color:var(--white);border:1px solid var(--green);border-radius:7px;min-height:44px;padding:11px 16px;font-weight:600;line-height:1.4}
+.sidebar>.about-button{background:var(--green);color:var(--white);border:1px solid var(--green);border-radius:6px;min-height:30px;padding:6px 10px;font-size:11px;font-weight:500;line-height:1.4}
 .sidebar>.about-button:hover{background:#17382c;border-color:#17382c}
-.sidebar>.about-button span{margin-left:8px}
-@media(max-width:1160px){.sidebar>.about-button{padding:10px 12px;font-size:11px}}
+.sidebar>.about-button span{margin-left:5px}
+@media(max-width:1160px){.sidebar>.about-button{padding:6px 9px;font-size:10px}}
