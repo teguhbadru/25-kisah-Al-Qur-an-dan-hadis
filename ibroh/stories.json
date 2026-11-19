@@ -35,8 +35,10 @@
       }
     ],
     "guide": "1. [Fakta] Sebuah kapal.\n2. [Fakta] B\n3. [Fakta] Salah (Nabi Nuh tetap sabar dan terus bekerja)\n4. [Fakta] Orang-orang yang beriman.",
-    "practice": "Kalau kesulitan mengerjakan tugas, coba lagi dengan sabar. Aba atau Bunda juga ikut menemani.",
-    "minutes": 4
+    "practice": "Kalau menara balokmu roboh, tarik napas dulu. Yuk, susun lagi dua balok bersama Aba atau Umma. Aba atau Umma ikut mencoba dengan tenang.",
+    "minutes": 4,
+    "conversation": "Kapan kamu pernah ingin menyerah? Waktu itu, apa yang membantumu mencoba lagi?",
+    "practiceFollowup": "Kebaikan mana yang sempat dicoba? Apa yang terjadi?"
   },
   {
     "id": "1.2",
@@ -74,8 +76,10 @@
       }
     ],
     "guide": "1. [Fakta] Nabi Sulaiman dan pasukannya.\n2. [Fakta] A\n3. [Fakta] Salah (ia tersenyum dan tertawa)\n4. [Fakta] Berdoa memohon agar dapat mensyukuri nikmat Allah.",
-    "practice": "Sebutkan tiga nikmat hari ini, lalu ucapkan alhamdulillah bersama.",
-    "minutes": 4
+    "practice": "Saat makan bersama hari ini, ajak anak menyebut satu nikmat yang ia rasakan, misalnya makanan di piringnya. Aba atau Umma ikut menyebut satu nikmat, lalu ucapkan alhamdulillah bersama.",
+    "minutes": 4,
+    "conversation": "Siapa yang membantumu hari ini? Bagaimana rasanya ketika kamu dibantu?",
+    "practiceFollowup": "Kebaikan mana yang sempat dicoba? Apa yang terjadi?"
   },
   {
     "id": "1.3",
@@ -113,8 +117,10 @@
       }
     ],
     "guide": "1. [Fakta] Gajah.\n2. [Fakta] A\n3. [Fakta] Benar\n4. [Fakta] Allah.",
-    "practice": "Saat merasa takut, ceritakan kepada orang tua dan berdoa bersama.",
-    "minutes": 4
+    "practice": "Kalau kamu takut saat hendak tidur, bilang kepada Aba atau Umma, “Aku takut, temani aku, ya.” Aba atau Umma mendengarkan, menemani, lalu mengajak berdoa sebelum tidur bersama.",
+    "minutes": 4,
+    "conversation": "Kapan kamu pernah merasa takut? Apa yang membuatmu merasa lebih tenang?",
+    "practiceFollowup": "Kebaikan mana yang sempat dicoba? Apa yang terjadi?"
   },
   {
     "id": "1.4",
