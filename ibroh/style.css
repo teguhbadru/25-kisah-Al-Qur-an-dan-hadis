@@ -148,3 +148,8 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .story-reading>h2{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.5;color:var(--white);background:var(--green);padding:8px 20px;margin:0}
 .story-reading-body{padding:24px 34px 30px}
 @media(max-width:600px){.reading.story-reading{border-radius:16px}.story-reading>h2{font-size:16px;padding:8px 16px}.story-reading-body{padding:20px 21px 25px}}
+
+/* Read stories in the same clear body font as the prayer text. */
+.story-reading .narrative{font-family:var(--sans);font-size:20px;font-weight:400;line-height:1.9;letter-spacing:normal}
+.story-reading.large .narrative{font-size:24px}
+@media(max-width:760px){.story-reading .narrative{font-size:18px}.story-reading.large .narrative{font-size:22px}}
