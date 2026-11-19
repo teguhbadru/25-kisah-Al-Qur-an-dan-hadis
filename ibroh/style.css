@@ -136,9 +136,9 @@ main:has(>section[aria-label="Koleksi kisah"]){padding-top:26px}
 main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18px}
 
 /* Prayer before the family reading session. */
-.prayer-box{border:3px solid #49b960;border-radius:20px;background:var(--white);overflow:hidden;margin:0 0 24px}
-.prayer-box h2{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.5;color:white;background:#49b960;padding:8px 20px;margin:0}
+.prayer-box{border:1px solid #cbd3c7;border-radius:20px;background:var(--white);overflow:hidden;margin:0 0 24px}
+.prayer-box h2{font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.5;color:var(--white);background:var(--green);padding:8px 20px;margin:0}
 .prayer-box ul{padding:12px 24px 14px 46px;margin:0}
 .prayer-box li{font-size:15px;line-height:1.8;padding-left:3px;margin:0 0 3px}
-.prayer-box li::marker{color:#49b960}
+.prayer-box li::marker{color:#6a8266}
 @media(max-width:600px){.prayer-box{border-radius:16px}.prayer-box h2{font-size:16px;padding:8px 16px}.prayer-box ul{padding:12px 16px 14px 34px}.prayer-box li{font-size:13px}}
