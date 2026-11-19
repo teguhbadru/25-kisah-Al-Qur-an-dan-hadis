@@ -153,3 +153,15 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .story-reading .narrative{font-family:var(--sans);font-size:20px;font-weight:400;line-height:1.9;letter-spacing:normal}
 .story-reading.large .narrative{font-size:24px}
 @media(max-width:760px){.story-reading .narrative{font-size:18px}.story-reading.large .narrative{font-size:22px}}
+
+/* Reading guidance in the IBROH green, sage, and gold palette. */
+.collection-guidance{display:grid;gap:14px;margin:0 0 24px}
+.collection-guidance .prayer-box{margin:0;border-radius:14px}
+.collection-guidance .schedule-box h2{background:var(--green)}
+.collection-guidance .sessions-guide-box h2{background:#6a8266}
+.collection-guidance .habits-guide-box h2{background:#857449}
+.collection-guidance .prayer-box h2{font-size:16px}
+.collection-guidance .prayer-box li{font-size:14px}
+.collection-guidance .sessions-guide-box li::marker{color:#6a8266}
+.collection-guidance .habits-guide-box li::marker{color:#857449}
+@media(max-width:600px){.collection-guidance .prayer-box h2{font-size:15px}.collection-guidance .prayer-box li{font-size:13px}}
