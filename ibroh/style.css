@@ -183,3 +183,7 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .collection-guidance .prayer-box[open]>summary::after{content:"−"}
 .collection-guidance .prayer-box>summary:focus-visible{outline-offset:-4px}
 @media(max-width:600px){.collection-guidance .prayer-box>summary{font-size:15px;padding:8px 16px}}
+
+.hikmah-label{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.hikmah-label>.eyebrow{margin:0}
+.value-chip{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;background:#e7ecdf;color:var(--green);font-family:var(--sans);font-size:12px;font-weight:600}
