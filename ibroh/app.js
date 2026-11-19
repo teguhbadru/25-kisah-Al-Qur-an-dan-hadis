@@ -68,6 +68,8 @@ function refreshCards() {
   const results = filteredStories();
   const grid = document.querySelector('#story-grid');
   grid.style.display = filter ? '' : 'none';
+  const guidance = document.querySelector('.collection-guidance');
+  if (guidance) guidance.style.display = filter ? 'none' : '';
   grid.innerHTML = filter ? (results.map(storyCard).join('') || emptySearch()) : '';
   const resultCount = document.querySelector('#result-count');
   if (resultCount) resultCount.textContent = filter ? `${results.length} kisah · ${levels[filter]}` : '';
