@@ -202,14 +202,22 @@ function route() {
     currentTab = 0;
     save();
     renderReader(story);
-  } else if (hash === '#perjalanan') renderJourney();
+  } else if (hash === '#panduan') renderParentGuide();
+  else if (hash === '#perjalanan') renderJourney();
   else if (hash === '#kisah') renderHome(true);
   else if (hash === '#beranda' || !location.hash) renderHome();
   else main.innerHTML = '<div class="empty"><h1>Kisah ini belum ditemukan.</h1><p>Pilih kisah lain dari koleksi IBROH.</p><a class="primary" href="#kisah">Buka koleksi →</a></div>';
   window.scrollTo({ top:0, behavior:'instant' });
 }
+function parentGuideMarkup() {
+  return `<h2>Mulai dari hadir bersama.</h2><p>Sesuaikan ritme dengan anak. Satu kisah bisa dibaca dan dibahas dalam beberapa pertemuan.</p><div class="guide-step"><b>1</b><div><h3>Baca dan kenali</h3><p>Awali dengan bismillah. Baca bergantian atau bacakan untuk anak. Bahas kata yang belum dipahami.</p></div></div><div class="guide-step"><b>2</b><div><h3>Dengarkan pikirannya</h3><p>Tanyakan isi cerita dan beri waktu berpikir. Ajak anak mencari petunjuk di bacaan. Pertanyaan pendapat boleh punya jawaban berbeda dengan alasan yang masuk akal.</p></div></div><div class="guide-step"><b>3</b><div><h3>Coba satu kebaikan</h3><p>Pilih kegiatan kecil yang bisa dilakukan bersama. Tanyakan lagi esok hari bagaimana pengalamannya.</p></div></div><p class="tiny">Lima tingkat membantu memilih tantangan pemahaman. Semua kisah dapat dibuka sesuai kesiapan anak. Catatan dan progres tersimpan pada browser yang digunakan.</p>`;
+}
+function renderParentGuide() {
+  document.title = 'Panduan orang tua — IBROH';
+  main.innerHTML = `<div class="intro"><div><p class="eyebrow">Pendamping membaca</p><h1>Panduan orang tua</h1><p>Langkah sederhana untuk membaca, berdiskusi, dan mencoba kebaikan bersama anak.</p></div></div><section class="reading" aria-label="Langkah pendampingan">${parentGuideMarkup()}<h3>Catat perkembangan dari sesi ke sesi</h3><p>Setelah diskusi selesai, pilih “Catat sesi ini” untuk mengisi tanggal dan judul kisah otomatis. Catatan panjang boleh dikosongkan. Kalian dapat kembali mencatat pengalaman setelah mencoba aksi kebaikannya.</p><p class="tiny">Catatan tersimpan di browser dan perangkat yang digunakan.</p></section><div class="reader-actions"><a class="primary" href="#kisah/1.1">Mulai kisah Nabi Nuh</a><a class="secondary" href="#kisah">Jelajahi kisah</a></div>`;
+}
 function openInfo(kind) {
-  document.querySelector('#dialog-content').innerHTML = kind === 'guide' ? `<p class="eyebrow">Panduan orang tua</p><h2>Mulai dari hadir bersama.</h2><p>Sesuaikan ritme dengan anak. Satu kisah bisa dibaca dan dibahas dalam beberapa pertemuan.</p><div class="guide-step"><b>1</b><div><h3>Baca dan kenali</h3><p>Awali dengan bismillah. Baca bergantian atau bacakan untuk anak. Bahas kata yang belum dipahami.</p></div></div><div class="guide-step"><b>2</b><div><h3>Dengarkan pikirannya</h3><p>Tanyakan isi cerita dan beri waktu berpikir. Ajak anak mencari petunjuk di bacaan. Pertanyaan pendapat boleh punya jawaban berbeda dengan alasan yang masuk akal.</p></div></div><div class="guide-step"><b>3</b><div><h3>Coba satu kebaikan</h3><p>Pilih kegiatan kecil yang bisa dilakukan bersama. Orang tua ikut memberi contoh. Tanyakan lagi esok hari bagaimana pengalamannya.</p></div></div><p class="tiny">Lima tingkat membantu memilih tantangan pemahaman. Semua kisah dapat dibuka sesuai kesiapan anak. Catatan dan progres tersimpan pada browser yang digunakan.</p>` : `<p class="eyebrow">Tentang IBROH</p>
+  document.querySelector('#dialog-content').innerHTML = kind === 'guide' ? parentGuideMarkup() : `<p class="eyebrow">Tentang IBROH</p>
 <h2>Memahami kisah.<br>Meneladani bersama.</h2>
 <p>IBROH tumbuh dari keinginan seorang Aba untuk lebih hadir menanamkan nilai-nilai agama dalam keseharian keluarga.</p>
 <p>Bacakan satu kisah, ajak anak membahas maknanya, lalu coba satu kebaikan bersama. Lewat 25 kisah dalam lima tingkat, anak berlatih memahami bacaan setahap demi setahap, dari menemukan fakta hingga merenungkan pesan cerita.</p>
