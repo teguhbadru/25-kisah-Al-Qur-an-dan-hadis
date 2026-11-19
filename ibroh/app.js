@@ -239,7 +239,7 @@ main.addEventListener('click', event => {
   if (button.hasAttribute('data-filter')) {
     const level = Number(button.dataset.filter);
     if (!Number.isInteger(level) || level < 1 || level > 5) return;
-    filter = level;
+    filter = filter === level ? 0 : level;
     refreshCards();
     return;
   }
