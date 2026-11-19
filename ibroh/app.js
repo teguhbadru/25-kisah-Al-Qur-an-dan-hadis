@@ -226,7 +226,6 @@ function openInfo(kind) {
 document.querySelector('[data-nav="kisah"]').addEventListener('click', () => {
   if (location.hash === '#kisah') renderHome(true);
 });
-document.querySelector('#guide-button').addEventListener('click', () => openInfo('guide'));
 document.querySelector('#about-button').addEventListener('click', () => openInfo('about'));
 document.querySelector('#dialog-close').addEventListener('click', () => document.querySelector('#info-dialog').close());
 document.querySelector('#info-dialog').addEventListener('click', event => {
