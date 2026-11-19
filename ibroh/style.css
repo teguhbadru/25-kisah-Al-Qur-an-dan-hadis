@@ -131,3 +131,6 @@
 /* Move the collection introduction a little closer to navigation. */
 main:has(>section[aria-label="Koleksi kisah"]){padding-top:26px}
 @media(max-width:1160px){main:has(>section[aria-label="Koleksi kisah"]){padding-top:14px}}
+
+/* Separate the collection eyebrow from its heading. */
+main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18px}
