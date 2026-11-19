@@ -123,3 +123,7 @@
 
 /* Keep the two CTA supporting lines close together. */
 .hero-copy>.start-duration+.start-duration{margin-top:2px!important}
+
+/* Give the reader's collection link a clear button shape. */
+.reader-top>.back{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:8px 12px;border:1px solid #cbd3c7;border-radius:6px;background:var(--white);color:var(--green);font-size:11px;font-weight:500;line-height:1.4}
+.reader-top>.back:hover{background:#edf1e8;border-color:#91a48a}
