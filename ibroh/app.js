@@ -60,14 +60,17 @@ function filtersMarkup() {
 }
 function filteredStories() {
   const term = query.trim().toLocaleLowerCase('id');
-  return stories.filter(story => (!filter || story.level === filter) && `${story.title} ${story.value} ${story.text}`.toLocaleLowerCase('id').includes(term));
+  if (!filter) return [];
+  return stories.filter(story => (story.level === filter) && `${story.title} ${story.value} ${story.text}`.toLocaleLowerCase('id').includes(term));
 }
 function emptySearch() { return '<div class="empty"><h3>Kisahnya belum ditemukan.</h3><p>Coba kata seperti sabar, berbagi, atau jujur.</p><button class="secondary" data-reset-search>Lihat semua kisah</button></div>'; }
 function refreshCards() {
   const results = filteredStories();
-  document.querySelector('#story-grid').innerHTML = results.map(storyCard).join('') || emptySearch();
+  const grid = document.querySelector('#story-grid');
+  grid.style.display = filter ? '' : 'none';
+  grid.innerHTML = filter ? (results.map(storyCard).join('') || emptySearch()) : '';
   const resultCount = document.querySelector('#result-count');
-  if (resultCount) resultCount.textContent = `${results.length} kisah${filter ? ` · ${levels[filter]}` : ' untuk dibaca bersama'}`;
+  if (resultCount) resultCount.textContent = filter ? `${results.length} kisah · ${levels[filter]}` : '';
   document.querySelectorAll('[data-filter]').forEach(button => {
     const selected = Number(button.dataset.filter) === filter;
     button.classList.toggle('selected', selected);
@@ -78,6 +81,7 @@ function prayerMarkup() {
   return `<section class="prayer-box" aria-labelledby="prayer-title"><h2 id="prayer-title">Doa sebelum memulai</h2><ul><li>Ajak anak berdoa sebelum mulai: "Rabbi zidni 'ilman warzuqni fahman."</li><li>Artinya: "Ya Tuhanku, tambahkanlah ilmuku dan anugerahkanlah aku pemahaman."</li><li>Awali dengan bismillah dan akhiri dengan alhamdulillah. Kebiasaan kecil ini membuat belajar terasa bermakna.</li></ul></section>`;
 }
 function renderHome(catalog = false) {
+  if (catalog) { filter = 0; query = ''; }
   const last = stories.find(story => story.id === state.last);
   const resume = last && state.stories[last.id]?.started && !state.stories[last.id]?.completed ? last : stories.find(story => state.stories[story.id]?.started && !state.stories[story.id]?.completed);
   const next = resume || stories.find(story => !state.stories[story.id]?.completed) || stories[0];
@@ -213,6 +217,9 @@ function openInfo(kind) {
 <p>Luangkan waktu untuk satu kisah hari ini. Setelah membacakannya, coba tanya, “Bagian mana yang paling kamu ingat?” Beri anak waktu untuk menjawab dengan kata-katanya sendiri. Lalu pilih satu kebaikan dari kisah itu yang bisa kalian coba bersama hari ini.</p>`;
   document.querySelector('#info-dialog').showModal();
 }
+document.querySelector('[data-nav="kisah"]').addEventListener('click', () => {
+  if (location.hash === '#kisah') renderHome(true);
+});
 document.querySelector('#guide-button').addEventListener('click', () => openInfo('guide'));
 document.querySelector('#about-button').addEventListener('click', () => openInfo('about'));
 document.querySelector('#dialog-close').addEventListener('click', () => document.querySelector('#info-dialog').close());
@@ -231,7 +238,8 @@ main.addEventListener('click', event => {
   if (button.hasAttribute('data-guide')) return openInfo('guide');
   if (button.hasAttribute('data-filter')) {
     const level = Number(button.dataset.filter);
-    filter = filter === level ? 0 : level;
+    if (!Number.isInteger(level) || level < 1 || level > 5) return;
+    filter = level;
     refreshCards();
     return;
   }
