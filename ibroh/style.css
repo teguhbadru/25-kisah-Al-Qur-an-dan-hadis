@@ -210,3 +210,5 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .sidebar nav a,.sidebar nav button{font-size:14px;line-height:1.4;white-space:normal;text-align:center;justify-content:center;min-height:56px;padding:12px 8px}
 .intro:has(.welcome-heading) p{font-size:13.5px;line-height:1.5;max-width:none}
 }
+
+@media(max-width:1160px){.how-to .how-to-intro{font-size:13.5px}}
