@@ -203,3 +203,10 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 @media(max-width:600px){.opening-prayer-content{padding:12px 16px 16px}.opening-prayer-content p{font-size:14px}.opening-prayer-content .prayer-arabic{font-size:26px}}
 
 .opening-prayer-content em{font-family:var(--serif);font-size:20px;font-style:normal;font-weight:500}
+
+/* Improve the mobile navigation and welcome text readability. */
+@media(max-width:600px){
+.sidebar nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;overflow-x:visible}
+.sidebar nav a,.sidebar nav button{font-size:14px;line-height:1.4;white-space:normal;text-align:center;justify-content:center;min-height:56px;padding:12px 8px}
+.intro:has(.welcome-heading) p{font-size:16px;line-height:1.75;max-width:none}
+}
