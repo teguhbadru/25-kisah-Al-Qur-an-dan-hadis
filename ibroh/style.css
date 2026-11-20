@@ -212,3 +212,9 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 }
 
 @media(max-width:1160px){.how-to .how-to-intro{font-size:13.5px}}
+
+@media(max-width:1160px){
+.how-to-steps h3{font-size:14.5px}
+.how-to-steps p{font-size:13.5px}
+.hero-copy>.start-duration{font-size:13.5px!important}
+}
