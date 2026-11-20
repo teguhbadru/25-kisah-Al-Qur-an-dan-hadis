@@ -187,3 +187,11 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .hikmah-label{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
 .hikmah-label>.eyebrow{margin:0}
 .value-chip{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;background:#e7ecdf;color:var(--green);font-family:var(--sans);font-size:12px;font-weight:600}
+
+/* Toggle the reading prayer using the same disclosure pattern as the schedule. */
+.opening-prayer>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--sans);font-size:18px;font-weight:700;line-height:1.5;color:var(--white);background:var(--green);padding:8px 20px}
+.opening-prayer>summary::-webkit-details-marker{display:none}
+.opening-prayer>summary::after{content:"+";font-size:20px;font-weight:400;line-height:1}
+.opening-prayer[open]>summary::after{content:"−"}
+.opening-prayer>summary:focus-visible{outline-offset:-4px}
+@media(max-width:600px){.opening-prayer>summary{font-size:16px;padding:8px 16px}}

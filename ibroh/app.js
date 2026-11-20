@@ -80,7 +80,7 @@ function refreshCards() {
   });
 }
 function prayerMarkup() {
-  return `<section class="prayer-box" aria-labelledby="prayer-title"><h2 id="prayer-title">Doa sebelum memulai</h2><ul><li>Ajak anak berdoa sebelum mulai: "Rabbi zidni 'ilman warzuqni fahman."</li><li>Artinya: "Ya Tuhanku, tambahkanlah ilmuku dan anugerahkanlah aku pemahaman."</li><li>Awali dengan bismillah dan akhiri dengan alhamdulillah. Kebiasaan kecil ini membuat belajar terasa bermakna.</li></ul></section>`;
+  return `<details class="prayer-box opening-prayer" aria-labelledby="prayer-title"><summary id="prayer-title">Doa sebelum memulai</summary><ul><li>Ajak anak berdoa sebelum mulai: "Rabbi zidni 'ilman warzuqni fahman."</li><li>Artinya: "Ya Tuhanku, tambahkanlah ilmuku dan anugerahkanlah aku pemahaman."</li><li>Awali dengan bismillah dan akhiri dengan alhamdulillah. Kebiasaan kecil ini membuat belajar terasa bermakna.</li></ul></details>`;
 }
 function renderHome(catalog = false) {
   if (catalog) { filter = 0; query = ''; }
