@@ -80,7 +80,7 @@ function refreshCards() {
   });
 }
 function prayerMarkup() {
-  return `<details class="prayer-box opening-prayer" aria-labelledby="prayer-title"><summary id="prayer-title">Doa sebelum memulai</summary><div class="opening-prayer-content"><p class="prayer-arabic" lang="ar" dir="rtl">رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا</p><p><em>Rabbi zidnī ‘ilman warzuqnī fahmā.</em> Artinya: “Ya Tuhanku, tambahkanlah ilmuku dan anugerahkanlah aku pemahaman.”</p><p>Awali dengan bismillah dan akhiri dengan alhamdulillah. Bagian pertama doa ini dari QS. Thaha: 114.</p></div></details>`;
+  return `<details class="prayer-box opening-prayer" aria-labelledby="prayer-title"><summary id="prayer-title">Doa sebelum memulai</summary><div class="opening-prayer-content"><p><em>Rabbi zidnī ‘ilman warzuqnī fahmā.</em> Artinya: “Ya Tuhanku, tambahkanlah ilmuku dan anugerahkanlah aku pemahaman.”</p><p>Awali dengan bismillah dan akhiri dengan alhamdulillah. Bagian pertama doa ini dari QS. Thaha: 114.</p></div></details>`;
 }
 function renderHome(catalog = false) {
   if (catalog) { filter = 0; query = ''; }
