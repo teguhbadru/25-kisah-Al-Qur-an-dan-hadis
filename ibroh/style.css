@@ -195,3 +195,9 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .opening-prayer[open]>summary::after{content:"−"}
 .opening-prayer>summary:focus-visible{outline-offset:-4px}
 @media(max-width:600px){.opening-prayer>summary{font-size:16px;padding:8px 16px}}
+
+.opening-prayer-content{padding:16px 24px 20px}
+.opening-prayer-content p{font-size:15px;line-height:1.8;margin:0 0 12px}
+.opening-prayer-content p:last-child{margin-bottom:0}
+.opening-prayer-content .prayer-arabic{font-family:"Noto Naskh Arabic","Amiri","Traditional Arabic",serif;font-size:28px;line-height:2;text-align:right}
+@media(max-width:600px){.opening-prayer-content{padding:12px 16px 16px}.opening-prayer-content p{font-size:14px}.opening-prayer-content .prayer-arabic{font-size:26px}}
