@@ -218,3 +218,8 @@ main:has(>section[aria-label="Koleksi kisah"])>.intro .eyebrow{margin-bottom:18p
 .how-to-steps p{font-size:13.5px}
 .hero-copy>.start-duration{font-size:13.5px!important}
 }
+
+@media(max-width:1160px){
+main:has(>section[aria-label="Koleksi kisah"])>.intro p:not(.eyebrow){font-size:13.5px}
+section[aria-label="Koleksi kisah"] .filter{font-size:13.5px}
+}
